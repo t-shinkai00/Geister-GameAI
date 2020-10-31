@@ -37,9 +37,9 @@ PLAYER_CLASS ?= RandomPlayer
 PLAYER_CLASS_FILE := $(shell grep -wrl -e "class $(PLAYER_CLASS)" Player)
 # ↓でもいいがmakeのバージョンが4以降でないと対応していない
 # PLAYER_CLASS_FILE != grep -wrl -e "class $(PLAYER_CLASS)" Player
-ifneq ($(shell sed -n 2p src/player.cpp), \#include "$(PLAYER_CLASS_FILE)")
-$(shell sed -i "2c #include \"$(PLAYER_CLASS_FILE)\"" src/player.cpp)
-endif
+# ifneq ($(shell sed -n 2p src/player.cpp), \#include "$(PLAYER_CLASS_FILE)")
+# $(shell sed -i "2c #include \"$(PLAYER_CLASS_FILE)\"" src/player.cpp)
+# endif
 
 DEFS := -DPLAYER_NAME=$(PLAYER_NAME) -DPLAYER_CLASS=$(PLAYER_CLASS)
 
