@@ -1,6 +1,6 @@
 #include "chototsuPlayer.hpp"
 #include "humanPlayer.hpp"
 #include "randomPlayer.hpp"
-#include "ChototsuPlayer2.hpp"
+#include "handmadePlayer.hpp"
 #include "MonteCarloPlayer.hpp"
 #include "randomPlayer2.hpp"
