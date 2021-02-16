@@ -2,15 +2,18 @@
 #include "random.hpp"
 #include "player.hpp"
 
-
-class RandomPlayer: public Player{
+class RandomPlayer : public Player
+{
     cpprefjp::random_device rd;
     std::mt19937 mt;
+
 public:
-    RandomPlayer(): mt(rd()){
+    RandomPlayer() : mt(rd())
+    {
     }
 
-    virtual std::string decideRed(){
+    virtual std::string decideRed()
+    {
         cpprefjp::random_device rd;
         std::mt19937 mt(rd());
 
@@ -18,7 +21,8 @@ public:
         return pattern[serector(mt)];
     }
 
-    virtual std::string decideHand(std::string res){
+    virtual std::string decideHand(std::string res)
+    {
         game.setState(res);
 
         auto legalMoves = candidateHand();
@@ -27,7 +31,8 @@ public:
         return action;
     }
 
-    virtual std::vector<Hand> candidateHand(){
+    virtual std::vector<Hand> candidateHand()
+    {
         return game.getLegalMove1st();
     }
 };
