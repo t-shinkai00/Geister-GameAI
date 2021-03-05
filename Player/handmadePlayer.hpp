@@ -176,7 +176,6 @@ public:
                         return action;
             }
 
-            // if(units[0].y()>2&&units[0].y()<6){
             if (unit.x() == units[5].x() + 1 && unit.y() == units[5].y())
             {
                 Hand action = Hand({units[5], Direction::East});
@@ -205,76 +204,7 @@ public:
                     if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
                         return action;
             }
-            // }else Hand action = Hand({units[0],Direction::South});for (int i = 0; i < legalMoves.size(); i++)
-            // if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
-            // return action;
 
-            // if(units[3].y()>2&&units[3].y()<6){
-            if (unit.x() == units[6].x() + 1 && unit.y() == units[6].y())
-            {
-                Hand action = Hand({units[6], Direction::East});
-                for (int i = 0; i < legalMoves.size(); i++)
-                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
-                        return action;
-            }
-            else if (unit.x() == units[6].x() - 1 && unit.y() == units[6].y())
-            {
-                Hand action = Hand({units[6], Direction::West});
-                for (int i = 0; i < legalMoves.size(); i++)
-                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
-                        return action;
-            }
-            else if (unit.x() == units[6].x() && unit.y() == units[6].y() + 1)
-            {
-                Hand action = Hand({units[6], Direction::South});
-                for (int i = 0; i < legalMoves.size(); i++)
-                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
-                        return action;
-            }
-            else if (unit.x() == units[6].x() && unit.y() == units[6].y() - 1)
-            {
-                Hand action = Hand({units[6], Direction::North});
-                for (int i = 0; i < legalMoves.size(); i++)
-                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
-                        return action;
-            }
-            // }else Hand action = Hand({units[3],Direction::South});
-            // for (int i = 0; i < legalMoves.size(); i++)
-            // if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
-            // return action;
-
-            // if(units[5].y()>2&&units[5].y()<6){
-            if (unit.x() == units[5].x() + 1 && unit.y() == units[5].y())
-            {
-                Hand action = Hand({units[5], Direction::East});
-                for (int i = 0; i < legalMoves.size(); i++)
-                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
-                        return action;
-            }
-            else if (unit.x() == units[5].x() - 1 && unit.y() == units[5].y())
-            {
-                Hand action = Hand({units[5], Direction::West});
-                for (int i = 0; i < legalMoves.size(); i++)
-                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
-                        return action;
-            }
-            else if (unit.x() == units[5].x() && unit.y() == units[5].y() + 1)
-            {
-                Hand action = Hand({units[5], Direction::South});
-                for (int i = 0; i < legalMoves.size(); i++)
-                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
-                        return action;
-            }
-            else if (unit.x() == units[5].x() && unit.y() == units[5].y() - 1)
-            {
-                Hand action = Hand({units[5], Direction::North});
-                for (int i = 0; i < legalMoves.size(); i++)
-                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
-                        return action;
-            }
-            // }else Hand action = Hand({units[5],Direction::South});
-
-            // if(units[6].y()>2&&units[6].y()<6){
             if (unit.x() == units[6].x() + 1 && unit.y() == units[6].y())
             {
                 Hand action = Hand({units[6], Direction::East});
