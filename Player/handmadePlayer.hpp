@@ -29,10 +29,18 @@ public:
 
     virtual std::string decideHand(std::string res)
     {
+        printf("aaaaaaaaaaaaaaaaaa");
         present++;
         game.setState(res);
         const std::array<Unit, 16> &units = game.allUnit();
         auto legalMoves = candidateHand();
+        printf("legalMoves:\n");
+        for (int i = 0; i < legalMoves.size(); i++)
+        {
+            printf("%d\n", legalMoves.size());
+            printf("%s ", legalMoves[i]);
+        }
+        printf("\n");
         std::uniform_int_distribution<int> serector1(0, legalMoves.size() - 1);
 
         // ゴール
@@ -219,30 +227,30 @@ public:
         if (units[mostFrontIndex].x() == 0 || units[mostFrontIndex].x() == 5)
         {
             auto action = Hand({units[mostFrontIndex], Direction::North});
-            for (int i = 0; i < legalMoves.size(); i++)
-                if (action == legalMoves[i])
-                    return action;
+            // for (int i = 0; i < legalMoves.size(); i++)
+            // if (action == legalMoves[i])
+            return action;
         }
         else if (units[mostFrontIndex].y() == 4 || units[mostFrontIndex].y() == 5)
         {
             auto action = Hand({units[mostFrontIndex], Direction::North});
-            for (int i = 0; i < legalMoves.size(); i++)
-                if (action == legalMoves[i])
-                    return action;
+            // for (int i = 0; i < legalMoves.size(); i++)
+            // if (action == legalMoves[i])
+            return action;
         }
         else if ((units[mostFrontIndex].x() == 1 || units[mostFrontIndex].x() == 2) && units[mostFrontIndex].y() <= 3 && units[mostFrontIndex].y() >= 0)
         {
             auto action = Hand({units[mostFrontIndex], Direction::West});
-            for (int i = 0; i < legalMoves.size(); i++)
-                if (action == legalMoves[i])
-                    return action;
+            // for (int i = 0; i < legalMoves.size(); i++)
+            // if (action == legalMoves[i])
+            return action;
         }
         else if ((units[mostFrontIndex].x() == 3 || units[mostFrontIndex].x() == 4) && units[mostFrontIndex].y() <= 3 && units[mostFrontIndex].y() >= 0)
         {
             auto action = Hand({units[mostFrontIndex], Direction::East});
-            for (int i = 0; i < legalMoves.size(); i++)
-                if (action == legalMoves[i])
-                    return action;
+            // for (int i = 0; i < legalMoves.size(); i++)
+            // if (action == legalMoves[i])
+            return action;
         }
     }
 };
