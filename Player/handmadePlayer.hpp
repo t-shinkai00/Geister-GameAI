@@ -321,28 +321,28 @@ public:
         }
         if (units[mostFrontIndex].x() == 0 || units[mostFrontIndex].x() == 5)
         {
-            auto action = Hand({units[mostFrontIndex], Direction::North});
+            Hand action = Hand({units[mostFrontIndex], Direction::North});
             for (int i = 0; i < legalMoves.size(); i++)
                 if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
                     return action;
         }
         else if (units[mostFrontIndex].y() == 4 || units[mostFrontIndex].y() == 5)
         {
-            auto action = Hand({units[mostFrontIndex], Direction::North});
+            Hand action = Hand({units[mostFrontIndex], Direction::North});
             for (int i = 0; i < legalMoves.size(); i++)
                 if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
                     return action;
         }
         else if ((units[mostFrontIndex].x() == 1 || units[mostFrontIndex].x() == 2) && units[mostFrontIndex].y() <= 3 && units[mostFrontIndex].y() >= 0)
         {
-            auto action = Hand({units[mostFrontIndex], Direction::West});
+            Hand action = Hand({units[mostFrontIndex], Direction::West});
             for (int i = 0; i < legalMoves.size(); i++)
                 if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
                     return action;
         }
         else if ((units[mostFrontIndex].x() == 3 || units[mostFrontIndex].x() == 4) && units[mostFrontIndex].y() <= 3 && units[mostFrontIndex].y() >= 0)
         {
-            auto action = Hand({units[mostFrontIndex], Direction::East});
+            Hand action = Hand({units[mostFrontIndex], Direction::East});
             for (int i = 0; i < legalMoves.size(); i++)
                 if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
                     return action;
