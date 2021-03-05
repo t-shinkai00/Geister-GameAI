@@ -66,21 +66,6 @@ public:
             }
         }
 
-        //取得した赤コマと青コマの数
-        int takeRed = 0;
-        int takeBlue = 0;
-        for (int u = 8; u < 16; ++u)
-        {
-            const Unit &unit = units[u];
-            if (unit.x() == 9 && unit.y() == 9)
-            {
-                if (unit.color() == UnitColor::Red)
-                    takeRed++;
-                if (unit.color() == UnitColor::Blue)
-                    takeBlue++;
-            }
-        }
-
         //初期のコマの動き方
         if (present == 1)
         {
@@ -109,6 +94,21 @@ public:
             for (int i = 0; i < legalMoves.size(); i++)
                 if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
                     return action;
+        }
+
+        //取得した赤コマと青コマの数
+        int takeRed = 0;
+        int takeBlue = 0;
+        for (int u = 8; u < 16; ++u)
+        {
+            const Unit &unit = units[u];
+            if (unit.x() == 9 && unit.y() == 9)
+            {
+                if (unit.color() == UnitColor::Red)
+                    takeRed++;
+                if (unit.color() == UnitColor::Blue)
+                    takeBlue++;
+            }
         }
 
         //相手の赤コマが近づいた場合
@@ -249,7 +249,8 @@ public:
                 }
             }
         }
-        if (units[mostFrontIndex].x() == 0 || units[mostFrontIndex].x() == 5)
+
+        if ((units[mostFrontIndex].x() == 0 || units[mostFrontIndex].x() == 5) && (units[mostFrontIndex].y() > 0 && units[mostFrontIndex].x() <= 5))
         {
             Hand action = Hand({units[mostFrontIndex], Direction::North});
             for (int i = 0; i < legalMoves.size(); i++)
@@ -263,14 +264,14 @@ public:
                 if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
                     return action;
         }
-        else if ((units[mostFrontIndex].x() == 1 || units[mostFrontIndex].x() == 2) && units[mostFrontIndex].y() <= 3 && units[mostFrontIndex].y() >= 0)
+        else if ((units[mostFrontIndex].x() == 1 || units[mostFrontIndex].x() == 2) && (units[mostFrontIndex].y() <= 3 && units[mostFrontIndex].y() >= 0))
         {
             Hand action = Hand({units[mostFrontIndex], Direction::West});
             for (int i = 0; i < legalMoves.size(); i++)
                 if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
                     return action;
         }
-        else if ((units[mostFrontIndex].x() == 3 || units[mostFrontIndex].x() == 4) && units[mostFrontIndex].y() <= 3 && units[mostFrontIndex].y() >= 0)
+        else if ((units[mostFrontIndex].x() == 3 || units[mostFrontIndex].x() == 4) && (units[mostFrontIndex].y() <= 3 && units[mostFrontIndex].y() >= 0))
         {
             Hand action = Hand({units[mostFrontIndex], Direction::East});
             for (int i = 0; i < legalMoves.size(); i++)
@@ -279,6 +280,16 @@ public:
         }
 
         //上記のプログラムの中で合法手がなかった場合
+        // 青コマが北に進める合法手があるか
+        for (int i = 0; i < 4; i++)
+        {
+            Hand action = Hand({units[i], Direction::North});
+            for (int i = 0; i < legalMoves.size(); i++)
+                if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                    return action;
+        }
+
+        // 合法手の中でランダムな手法
         int number = get_rand_range(0, legalMoves.size());
         return Hand({units[legalMoves[number].unit.id()], legalMoves[number].direct});
     }
