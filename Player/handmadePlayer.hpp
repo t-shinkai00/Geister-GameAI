@@ -19,28 +19,16 @@ public:
     {
         return std::string("ADFG");
     }
-    virtual std::vector<Hand> candidateHand()
-    {
-        return game.getLegalMove1st();
-    }
 
     //現在何手目かの変数
     int present = 0;
 
     virtual std::string decideHand(std::string res)
     {
-        printf("aaaaaaaaaaaaaaaaaa");
         present++;
         game.setState(res);
         const std::array<Unit, 16> &units = game.allUnit();
-        auto legalMoves = candidateHand();
-        printf("legalMoves:\n");
-        for (int i = 0; i < legalMoves.size(); i++)
-        {
-            printf("%d\n", legalMoves.size());
-            printf("%s ", legalMoves[i]);
-        }
-        printf("\n");
+        std::vector<Hand> legalMoves = game.getLegalMove1st();
         std::uniform_int_distribution<int> serector1(0, legalMoves.size() - 1);
 
         // ゴール
@@ -50,11 +38,17 @@ public:
             {
                 if (u.x() == 0 && u.y() == 0)
                 {
-                    return Hand({u, Direction::West});
+                    Hand action = Hand({u, Direction::West});
+                    for (int i = 0; i < legalMoves.size(); i++)
+                        if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                            return action;
                 }
                 if (u.x() == 5 && u.y() == 0)
                 {
-                    return Hand({u, Direction::East});
+                    Hand action = Hand({u, Direction::East});
+                    for (int i = 0; i < legalMoves.size(); i++)
+                        if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                            return action;
                 }
             }
         }
@@ -77,20 +71,31 @@ public:
         //初期のコマの動き方
         if (present == 1)
         {
-            auto action = Hand({units[4], Direction::West});
-            return action;
+            Hand action = Hand({units[4], Direction::West});
+            for (int i = 0; i < legalMoves.size(); i++)
+                if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                    return action;
         }
         else if (present == 2)
         {
-            return Hand({units[7], Direction::East});
+            Hand action = Hand({units[7], Direction::East});
+            for (int i = 0; i < legalMoves.size(); i++)
+                if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                    return action;
         }
         else if (present == 3)
         {
-            return Hand({units[5], Direction::West});
+            Hand action = Hand({units[5], Direction::West});
+            for (int i = 0; i < legalMoves.size(); i++)
+                if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                    return action;
         }
         else if (present == 4)
         {
-            return Hand({units[6], Direction::East});
+            Hand action = Hand({units[6], Direction::East});
+            for (int i = 0; i < legalMoves.size(); i++)
+                if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                    return action;
         }
 
         //相手の赤コマが近づいた場合
@@ -102,111 +107,188 @@ public:
             const Unit &unit = units[u];
             if (unit.x() == units[4].x() + 1 && unit.y() == units[4].y() && units[4].y() > 3 && units[4].y() < 6)
             {
-                return Hand({units[4], Direction::East});
+                Hand action = Hand({units[4], Direction::East});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[4].x() - 1 && unit.y() == units[4].y() && units[4].y() > 3 && units[4].y() < 6)
             {
-                return Hand({units[4], Direction::West});
+                Hand action = Hand({units[4], Direction::West});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[4].x() && unit.y() == units[4].y() + 1 && units[4].y() > 3 && units[4].y() < 6)
             {
-                return Hand({units[4], Direction::South});
+                Hand action = Hand({units[4], Direction::South});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[4].x() && unit.y() == units[4].y() - 1 && units[4].y() > 3 && units[4].y() < 6)
             {
-                return Hand({units[4], Direction::North});
+                Hand action = Hand({units[4], Direction::North});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
 
             if (unit.x() == units[7].x() + 1 && unit.y() == units[7].y() && units[7].y() > 3 && units[7].y() < 6)
             {
-                return Hand({units[7], Direction::East});
+                Hand action = Hand({units[7], Direction::East});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[7].x() - 1 && unit.y() == units[7].y() && units[7].y() > 3 && units[7].y() < 6)
             {
-                return Hand({units[7], Direction::West});
+                Hand action = Hand({units[7], Direction::West});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[7].x() && unit.y() == units[7].y() + 1 && units[7].y() > 3 && units[7].y() < 6)
             {
-                return Hand({units[7], Direction::South});
+                Hand action = Hand({units[7], Direction::South});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[7].x() && unit.y() == units[7].y() - 1 && units[7].y() > 3 && units[7].y() < 6)
             {
-                return Hand({units[7], Direction::North});
+                Hand action = Hand({units[7], Direction::North});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
 
             // if(units[0].y()>2&&units[0].y()<6){
             if (unit.x() == units[0].x() + 1 && unit.y() == units[0].y())
             {
-                return Hand({units[0], Direction::East});
+                Hand action = Hand({units[0], Direction::East});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[0].x() - 1 && unit.y() == units[0].y())
             {
-                return Hand({units[0], Direction::West});
+                Hand action = Hand({units[0], Direction::West});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[0].x() && unit.y() == units[0].y() + 1)
             {
-                return Hand({units[0], Direction::South});
+                Hand action = Hand({units[0], Direction::South});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[0].x() && unit.y() == units[0].y() - 1)
             {
-                return Hand({units[0], Direction::North});
+                Hand action = Hand({units[0], Direction::North});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
-            // }else return Hand({units[0],Direction::South});
+            // }else Hand action = Hand({units[0],Direction::South});for (int i = 0; i < legalMoves.size(); i++)
+            // if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+            // return action;
 
             // if(units[3].y()>2&&units[3].y()<6){
             if (unit.x() == units[3].x() + 1 && unit.y() == units[3].y())
             {
-                return Hand({units[3], Direction::East});
+                Hand action = Hand({units[3], Direction::East});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[3].x() - 1 && unit.y() == units[3].y())
             {
-                return Hand({units[3], Direction::West});
+                Hand action = Hand({units[3], Direction::West});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[3].x() && unit.y() == units[3].y() + 1)
             {
-                return Hand({units[3], Direction::South});
+                Hand action = Hand({units[3], Direction::South});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[3].x() && unit.y() == units[3].y() - 1)
             {
-                return Hand({units[3], Direction::North});
+                Hand action = Hand({units[3], Direction::North});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
-            // }else return Hand({units[3],Direction::South});
+            // }else Hand action = Hand({units[3],Direction::South});
+            // for (int i = 0; i < legalMoves.size(); i++)
+            // if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+            // return action;
 
             // if(units[5].y()>2&&units[5].y()<6){
             if (unit.x() == units[5].x() + 1 && unit.y() == units[5].y())
             {
-                return Hand({units[5], Direction::East});
+                Hand action = Hand({units[5], Direction::East});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[5].x() - 1 && unit.y() == units[5].y())
             {
-                return Hand({units[5], Direction::West});
+                Hand action = Hand({units[5], Direction::West});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[5].x() && unit.y() == units[5].y() + 1)
             {
-                return Hand({units[5], Direction::South});
+                Hand action = Hand({units[5], Direction::South});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[5].x() && unit.y() == units[5].y() - 1)
             {
-                return Hand({units[5], Direction::North});
+                Hand action = Hand({units[5], Direction::North});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
-            // }else return Hand({units[5],Direction::South});
+            // }else Hand action = Hand({units[5],Direction::South});
 
             // if(units[6].y()>2&&units[6].y()<6){
             if (unit.x() == units[6].x() + 1 && unit.y() == units[6].y())
             {
-                return Hand({units[6], Direction::East});
+                Hand action = Hand({units[6], Direction::East});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[6].x() - 1 && unit.y() == units[6].y())
             {
-                return Hand({units[6], Direction::West});
+                Hand action = Hand({units[6], Direction::West});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[6].x() && unit.y() == units[6].y() + 1)
             {
-                return Hand({units[6], Direction::South});
+                Hand action = Hand({units[6], Direction::South});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
             else if (unit.x() == units[6].x() && unit.y() == units[6].y() - 1)
             {
-                return Hand({units[6], Direction::North});
+                Hand action = Hand({units[6], Direction::North});
+                for (int i = 0; i < legalMoves.size(); i++)
+                    if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                        return action;
             }
         }
 
@@ -227,31 +309,34 @@ public:
         if (units[mostFrontIndex].x() == 0 || units[mostFrontIndex].x() == 5)
         {
             auto action = Hand({units[mostFrontIndex], Direction::North});
-            // for (int i = 0; i < legalMoves.size(); i++)
-            // if (action == legalMoves[i])
-            return action;
+            for (int i = 0; i < legalMoves.size(); i++)
+                if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                    return action;
         }
         else if (units[mostFrontIndex].y() == 4 || units[mostFrontIndex].y() == 5)
         {
             auto action = Hand({units[mostFrontIndex], Direction::North});
-            // for (int i = 0; i < legalMoves.size(); i++)
-            // if (action == legalMoves[i])
-            return action;
+            for (int i = 0; i < legalMoves.size(); i++)
+                if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                    return action;
         }
         else if ((units[mostFrontIndex].x() == 1 || units[mostFrontIndex].x() == 2) && units[mostFrontIndex].y() <= 3 && units[mostFrontIndex].y() >= 0)
         {
             auto action = Hand({units[mostFrontIndex], Direction::West});
-            // for (int i = 0; i < legalMoves.size(); i++)
-            // if (action == legalMoves[i])
-            return action;
+            for (int i = 0; i < legalMoves.size(); i++)
+                if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                    return action;
         }
         else if ((units[mostFrontIndex].x() == 3 || units[mostFrontIndex].x() == 4) && units[mostFrontIndex].y() <= 3 && units[mostFrontIndex].y() >= 0)
         {
             auto action = Hand({units[mostFrontIndex], Direction::East});
-            // for (int i = 0; i < legalMoves.size(); i++)
-            // if (action == legalMoves[i])
-            return action;
+            for (int i = 0; i < legalMoves.size(); i++)
+                if (action.unit.id() == legalMoves[i].unit.id() && action.direct == legalMoves[i].direct)
+                    return action;
         }
+
+        //上記のプログラムの中で合法手がなかった場合
+        return Hand({units[legalMoves[0].unit.id()], legalMoves[0].direct});
     }
 };
 
