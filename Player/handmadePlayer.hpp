@@ -104,9 +104,9 @@ public:
             const Unit &unit = units[u];
             if (unit.x() == 9 && unit.y() == 9)
             {
-                if (unit.color() == UnitColor::Red)
+                if (unit.color() == UnitColor::red)
                     takeRed++;
-                if (unit.color() == UnitColor::Blue)
+                if (unit.color() == UnitColor::blue)
                     takeBlue++;
             }
         }
